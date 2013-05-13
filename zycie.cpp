@@ -7,7 +7,7 @@
 #include <qmath.h>
 #include "zycie.h"
 
-GameWidget::GameWidget(QWidget *parent) :
+Zycie::Zycie(QWidget *parent) :
     QWidget(parent),
     timer(new QTimer(this)),
     generacja(-1),
@@ -15,23 +15,23 @@ GameWidget::GameWidget(QWidget *parent) :
 {
     timer->setInterval(300);
     KolorBoxow = "#000";
-    connect(timer, SIGNAL(timeout()), this, SLOT(newGeneration()));
+    connect(timer, SIGNAL(timeout()), this, SLOT(NowaGeneracja()));
     memset(&Tablica1, false, sizeof(Tablica1));
     memset(&Tablica2, false, sizeof(Tablica2));
 }
 
-void GameWidget::UruchomGre(const int &number)
+void Zycie::UruchomGre(const int &number)
 {
     generacja = number;
     timer->start();
 }
 
-void GameWidget::ZatrzymajGre()
+void Zycie::ZatrzymajGre()
 {
     timer->stop();
 }
 
-void GameWidget::WyczyscPola()
+void Zycie::WyczyscPola()
 {
     for(int k = 1; k <= RozmiarPola; k++) {
         for(int j = 1; j <= RozmiarPola; j++) {
@@ -41,18 +41,18 @@ void GameWidget::WyczyscPola()
     update();
 }
 
-int GameWidget::cellNumber()
+int Zycie::LiczbaKomorek()
 {
     return RozmiarPola;
 }
 
-void GameWidget::setCellNumber(const int &s)
+void Zycie::UstawLiczbeKomorek(const int &s)
 {
     RozmiarPola = s;
     update();
 }
 
-QString GameWidget::dump()
+QString Zycie::dump()
 {
     char temp;
     QString master = "";
@@ -70,7 +70,7 @@ QString GameWidget::dump()
     return master;
 }
 
-void GameWidget::setDump(const QString &data)
+void Zycie::setDump(const QString &data)
 {
     int current = 0;
     for(int k = 1; k <= RozmiarPola; k++) {
@@ -83,17 +83,17 @@ void GameWidget::setDump(const QString &data)
     update();
 }
 
-int GameWidget::interval()
+int Zycie::interval()
 {
     return timer->interval();
 }
 
-void GameWidget::setInterval(int msec)
+void Zycie::UstawInterval(int msec)
 {
     timer->setInterval(msec);
 }
 
-bool GameWidget::Zyj(int k, int j)
+bool Zycie::Zyj(int k, int j)
 {
     int power = 0;
     power += Tablica1[k+1][j];
@@ -109,7 +109,7 @@ bool GameWidget::Zyj(int k, int j)
     return false;
 }
 
-void GameWidget::newGeneration()
+void Zycie::NowaGeneracja()
 {
     if(generacja < 0)
         generacja++;
@@ -146,14 +146,14 @@ void GameWidget::newGeneration()
     }
 }
 
-void GameWidget::paintEvent(QPaintEvent *)
+void Zycie::paintEvent(QPaintEvent *)
 {
     QPainter p(this);
-    paintGrid(p);
-    paintUniverse(p);
+    RysujSiatke(p);
+    RysujPole(p);
 }
 
-void GameWidget::mousePressEvent(QMouseEvent *e)
+void Zycie::mousePressEvent(QMouseEvent *e)
 {
     double cellWidth = (double)width()/RozmiarPola;
     double cellHeight = (double)height()/RozmiarPola;
@@ -163,7 +163,7 @@ void GameWidget::mousePressEvent(QMouseEvent *e)
     update();
 }
 
-void GameWidget::paintGrid(QPainter &p)
+void Zycie::RysujSiatke(QPainter &p)
 {
     QRect borders(0, 0, width()-1, height()-1); // borders of the universe
     QColor gridColor = KolorBoxow; // color of the grid
@@ -178,7 +178,7 @@ void GameWidget::paintGrid(QPainter &p)
     p.drawRect(borders);
 }
 
-void GameWidget::paintUniverse(QPainter &p)
+void Zycie::RysujPole(QPainter &p)
 {
     double cellWidth = (double)width()/RozmiarPola;
     double cellHeight = (double)height()/RozmiarPola;
@@ -194,12 +194,12 @@ void GameWidget::paintUniverse(QPainter &p)
     }
 }
 
-QColor GameWidget::masterColor()
+QColor Zycie::JakiKolor()
 {
     return KolorBoxow;
 }
 
-void GameWidget::setMasterColor(const QColor &color)
+void Zycie::UstawianieKoloru(const QColor &color)
 {
     KolorBoxow = color;
     update();

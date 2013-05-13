@@ -9,24 +9,24 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    currentColor(QColor("#000")),
-    game(new GameWidget(this))
+    DomyslnyKolor(QColor("#000")),
+    game(new Zycie(this))
 {
     ui->setupUi(this);
 
     QPixmap icon(16, 16);
-    icon.fill(currentColor);
+    icon.fill(DomyslnyKolor);
     ui->colorButton->setIcon( QIcon(icon) );
 
     connect(ui->startButton, SIGNAL(clicked()), game,SLOT(UruchomGre()));
     connect(ui->stopButton, SIGNAL(clicked()), game,SLOT(ZatrzymajGre()));
     connect(ui->clearButton, SIGNAL(clicked()), game,SLOT(WyczyscPola()));
-    connect(ui->iterInterval, SIGNAL(valueChanged(int)), game, SLOT(setInterval(int)));
-    connect(ui->cellsControl, SIGNAL(valueChanged(int)), game, SLOT(setCellNumber(int)));
+    connect(ui->iterInterval, SIGNAL(valueChanged(int)), game, SLOT(UstawInterval(int)));
+    connect(ui->cellsControl, SIGNAL(valueChanged(int)), game, SLOT(UstawLiczbeKomorek(int)));
     connect(ui->colorButton, SIGNAL(clicked()), this, SLOT(selectMasterColor()));
 
-    connect(ui->saveButton, SIGNAL(clicked()), this, SLOT(saveGame()));
-    connect(ui->loadButton, SIGNAL(clicked()), this, SLOT(loadGame()));
+    connect(ui->saveButton, SIGNAL(clicked()), this, SLOT(ZapiszGre()));
+    connect(ui->loadButton, SIGNAL(clicked()), this, SLOT(WczytajGre()));
 
     ui->mainLayout->setStretchFactor(ui->gameLayout, 8);
     ui->mainLayout->setStretchFactor(ui->setLayout, 2);
@@ -38,7 +38,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::saveGame()
+void MainWindow::ZapiszGre()
 {
     QString filename = QFileDialog::getSaveFileName(this,
                                                     tr("Save current game"),
@@ -49,10 +49,10 @@ void MainWindow::saveGame()
     QFile file(filename);
     if(!file.open(QIODevice::WriteOnly | QIODevice::Truncate))
         return;
-    QString s = QString::number(game->cellNumber())+"\n";
+    QString s = QString::number(game->LiczbaKomorek())+"\n";
     file.write(s.toAscii());
     file.write(game->dump().toAscii());
-    QColor color = game->masterColor();
+    QColor color = game->JakiKolor();
     QString buf = QString::number(color.red())+" "+
                   QString::number(color.green())+" "+
                   QString::number(color.blue())+"\n";
@@ -63,7 +63,7 @@ void MainWindow::saveGame()
     file.close();
 }
 
-void MainWindow::loadGame()
+void MainWindow::WczytajGre()
 {
     QString filename = QFileDialog::getOpenFileName(this,
                                                     tr("Open saved game"),
@@ -80,7 +80,7 @@ void MainWindow::loadGame()
     in >> sv;
     ui->cellsControl->setValue(sv);
 
-    game->setCellNumber(sv);
+    game->UstawLiczbeKomorek(sv);
     QString dump="";
     for(int k=0; k != sv; k++) {
         QString t;
@@ -91,23 +91,23 @@ void MainWindow::loadGame()
 
     int r,g,b; // RGB color
     in >> r >> g >> b;
-    currentColor = QColor(r,g,b);
-    game->setMasterColor(currentColor); // sets color of the dots
+    DomyslnyKolor = QColor(r,g,b);
+    game->UstawianieKoloru(DomyslnyKolor); // sets color of the dots
     QPixmap icon(16, 16); // icon on the button
-    icon.fill(currentColor); // fill with new color
+    icon.fill(DomyslnyKolor); // fill with new color
     ui->colorButton->setIcon( QIcon(icon) ); // set icon for button
     in >> r; // r will be interval number
     ui->iterInterval->setValue(r);
-    game->setInterval(r);
+    game->UstawInterval(r);
 }
 
 void MainWindow::selectMasterColor()
 {
-    QColor color = QColorDialog::getColor(currentColor, this, tr("Select color of figures"));
+    QColor color = QColorDialog::getColor(DomyslnyKolor, this, tr("Select color of figures"));
     if(!color.isValid())
         return;
-    currentColor = color;
-    game->setMasterColor(color);
+    DomyslnyKolor = color;
+    game->UstawianieKoloru(color);
     QPixmap icon(16, 16);
     icon.fill(color);
     ui->colorButton->setIcon( QIcon(icon) );

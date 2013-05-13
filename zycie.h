@@ -4,11 +4,11 @@
 #include <QColor>
 #include <QWidget>
 
-class GameWidget : public QWidget
+class Zycie : public QWidget
 {
     Q_OBJECT
 public:
-    explicit GameWidget(QWidget *parent = 0);
+    explicit Zycie(QWidget *parent = 0);
 
 protected:
     void paintEvent(QPaintEvent *);
@@ -17,35 +17,35 @@ protected:
 signals:
     
 public slots:
-    void UruchomGre(const int &number = -1); // start
-    void ZatrzymajGre(); // finish
-    void WyczyscPola(); // clear
+    void UruchomGre(const int &number = -1);
+    void ZatrzymajGre();
+    void WyczyscPola();
 
-    int cellNumber(); // Liczba komórek w jednym rzędzie
-    void setCellNumber(const int &s); // set number of the cells in one row
+    int LiczbaKomorek(); // Liczba komórek w jednym rzędzie
+    void UstawLiczbeKomorek(const int &s); // set number of the cells in one row
 
     int interval(); // interval between generations
-    void setInterval(int msec); // set interval between generations
+    void UstawInterval(int msec); // set interval between generations
 
-    QColor masterColor(); // color of the cells
-    void setMasterColor(const QColor &color); // set color of the cells
+    QColor JakiKolor();
+    void UstawianieKoloru(const QColor &color);
 
     QString dump(); // dump of current universe
     void setDump(const QString &data); // set current universe from it's dump
 
 private slots:
-    void paintGrid(QPainter &p);
-    void paintUniverse(QPainter &p);
-    void newGeneration();
+    void RysujSiatke(QPainter &p);
+    void RysujPole(QPainter &p);
+    void NowaGeneracja();
 
 private:
     QColor KolorBoxow;
     QTimer* timer;
     int generacja;
-    bool Tablica1[102][102]; // map
-    bool Tablica2[102][102]; // map
+    bool Tablica1[102][102];
+    bool Tablica2[102][102];
     int RozmiarPola;
-    bool Zyj(int k, int j); // return true if universe[k][j] accept rules
+    bool Zyj(int k, int j);
     
 };
 

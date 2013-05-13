@@ -20,13 +20,13 @@ public:
 public slots:
     void selectMasterColor();
 
-    void saveGame();
-    void loadGame();
+    void ZapiszGre();
+    void WczytajGre();
     
 private:
     Ui::MainWindow *ui;
-    QColor currentColor;
-    GameWidget* game;
+    QColor DomyslnyKolor;
+    Zycie* game;
 };
 
 #endif // MAINWINDOW_H
