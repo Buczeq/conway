@@ -18,6 +18,7 @@ Zycie::Zycie(QWidget *parent) :
     connect(timer, SIGNAL(timeout()), this, SLOT(NowaGeneracja()));
     memset(&Tablica1, false, sizeof(Tablica1));
     memset(&Tablica2, false, sizeof(Tablica2));
+    rodzajRysowanegoOrganizmu=0;
 }
 
 void Zycie::UruchomGre(const int &number)
@@ -159,7 +160,26 @@ void Zycie::mousePressEvent(QMouseEvent *e)
     double cellHeight = (double)height()/RozmiarPola;
     int k = floor(e->y()/cellHeight)+1;
     int j = floor(e->x()/cellWidth)+1;
-    Tablica1[k][j] = !Tablica1[k][j];
+    if(rodzajRysowanegoOrganizmu==0)
+    {
+        Tablica1[k][j] = !Tablica1[k][j];
+    }
+    if(rodzajRysowanegoOrganizmu==1)
+    {
+        Tablica1[k][j] = !Tablica1[k][j];
+        Tablica1[k+1][j] = !Tablica1[k+1][j];
+        Tablica1[k][j+1] = !Tablica1[k][j+1];
+        Tablica1[k+1][j+1] = !Tablica1[k+1][j+1];
+    }
+    if(rodzajRysowanegoOrganizmu==2)
+    {
+        Tablica1[k][j] = !Tablica1[k][j];
+        Tablica1[k+1][j] = !Tablica1[k+1][j];
+        Tablica1[k][j+1] = !Tablica1[k][j+1];
+        Tablica1[k+2][j+1] = !Tablica1[k+2][j+1];
+        Tablica1[k+1][j+2] = !Tablica1[k+1][j+2];
+    }
+
     update();
 }
 

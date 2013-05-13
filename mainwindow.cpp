@@ -112,3 +112,13 @@ void MainWindow::selectMasterColor()
     icon.fill(color);
     ui->colorButton->setIcon( QIcon(icon) );
 }
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    game->rodzajRysowanegoOrganizmu=1;
+}
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    game->rodzajRysowanegoOrganizmu=2;
+}

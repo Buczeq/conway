@@ -9,6 +9,7 @@ class Zycie : public QWidget
     Q_OBJECT
 public:
     explicit Zycie(QWidget *parent = 0);
+    int rodzajRysowanegoOrganizmu;
 
 protected:
     void paintEvent(QPaintEvent *);
@@ -46,6 +47,8 @@ private:
     bool Tablica2[102][102];
     int RozmiarPola;
     bool Zyj(int k, int j);
+
+
     
 };
 
