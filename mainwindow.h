@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QColor>
-#include "gamewidget.h"
+#include "zycie.h"
 
 namespace Ui {
 class MainWindow;

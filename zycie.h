@@ -17,11 +17,11 @@ protected:
 signals:
     
 public slots:
-    void startGame(const int &number = -1); // start
-    void stopGame(); // finish
-    void clear(); // clear
+    void UruchomGre(const int &number = -1); // start
+    void ZatrzymajGre(); // finish
+    void WyczyscPola(); // clear
 
-    int cellNumber(); // number of the cells in one row
+    int cellNumber(); // Liczba komórek w jednym rzędzie
     void setCellNumber(const int &s); // set number of the cells in one row
 
     int interval(); // interval between generations
@@ -39,13 +39,13 @@ private slots:
     void newGeneration();
 
 private:
-    QColor m_masterColor;
+    QColor KolorBoxow;
     QTimer* timer;
-    int generations;
-    bool universe[102][102]; // map
-    bool next[102][102]; // map
-    int universeSize;
-    bool isAlive(int k, int j); // return true if universe[k][j] accept rules
+    int generacja;
+    bool Tablica1[102][102]; // map
+    bool Tablica2[102][102]; // map
+    int RozmiarPola;
+    bool Zyj(int k, int j); // return true if universe[k][j] accept rules
     
 };
 

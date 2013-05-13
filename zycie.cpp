@@ -5,37 +5,37 @@
 #include <QRectF>
 #include <QPainter>
 #include <qmath.h>
-#include "gamewidget.h"
+#include "zycie.h"
 
 GameWidget::GameWidget(QWidget *parent) :
     QWidget(parent),
     timer(new QTimer(this)),
-    generations(-1),
-    universeSize(50)
+    generacja(-1),
+    RozmiarPola(50)
 {
     timer->setInterval(300);
-    m_masterColor = "#000";
+    KolorBoxow = "#000";
     connect(timer, SIGNAL(timeout()), this, SLOT(newGeneration()));
-    memset(&universe, false, sizeof(universe));
-    memset(&next, false, sizeof(next));
+    memset(&Tablica1, false, sizeof(Tablica1));
+    memset(&Tablica2, false, sizeof(Tablica2));
 }
 
-void GameWidget::startGame(const int &number)
+void GameWidget::UruchomGre(const int &number)
 {
-    generations = number;
+    generacja = number;
     timer->start();
 }
 
-void GameWidget::stopGame()
+void GameWidget::ZatrzymajGre()
 {
     timer->stop();
 }
 
-void GameWidget::clear()
+void GameWidget::WyczyscPola()
 {
-    for(int k = 1; k <= universeSize; k++) {
-        for(int j = 1; j <= universeSize; j++) {
-            universe[k][j] = false;
+    for(int k = 1; k <= RozmiarPola; k++) {
+        for(int j = 1; j <= RozmiarPola; j++) {
+            Tablica1[k][j] = false;
         }
     }
     update();
@@ -43,12 +43,12 @@ void GameWidget::clear()
 
 int GameWidget::cellNumber()
 {
-    return universeSize;
+    return RozmiarPola;
 }
 
 void GameWidget::setCellNumber(const int &s)
 {
-    universeSize = s;
+    RozmiarPola = s;
     update();
 }
 
@@ -56,9 +56,9 @@ QString GameWidget::dump()
 {
     char temp;
     QString master = "";
-    for(int k = 1; k <= universeSize; k++) {
-        for(int j = 1; j <= universeSize; j++) {
-            if(universe[k][j] == true) {
+    for(int k = 1; k <= RozmiarPola; k++) {
+        for(int j = 1; j <= RozmiarPola; j++) {
+            if(Tablica1[k][j] == true) {
                 temp = '*';
             } else {
                 temp = 'o';
@@ -73,9 +73,9 @@ QString GameWidget::dump()
 void GameWidget::setDump(const QString &data)
 {
     int current = 0;
-    for(int k = 1; k <= universeSize; k++) {
-        for(int j = 1; j <= universeSize; j++) {
-            universe[k][j] = data[current] == '*';
+    for(int k = 1; k <= RozmiarPola; k++) {
+        for(int j = 1; j <= RozmiarPola; j++) {
+            Tablica1[k][j] = data[current] == '*';
             current++;
         }
         current++;
@@ -93,51 +93,51 @@ void GameWidget::setInterval(int msec)
     timer->setInterval(msec);
 }
 
-bool GameWidget::isAlive(int k, int j)
+bool GameWidget::Zyj(int k, int j)
 {
     int power = 0;
-    power += universe[k+1][j];
-    power += universe[k-1][j];
-    power += universe[k][j+1];
-    power += universe[k][j-1];
-    power += universe[k+1][j+1];
-    power += universe[k-1][j-1];
-    power += universe[k-1][j+1];
-    power += universe[k+1][j-1];
-    if (((universe[k][j] == true) && (power == 2)) || (power == 3))
+    power += Tablica1[k+1][j];
+    power += Tablica1[k-1][j];
+    power += Tablica1[k][j+1];
+    power += Tablica1[k][j-1];
+    power += Tablica1[k+1][j+1];
+    power += Tablica1[k-1][j-1];
+    power += Tablica1[k-1][j+1];
+    power += Tablica1[k+1][j-1];
+    if (((Tablica1[k][j] == true) && (power == 2)) || (power == 3))
            return true;
     return false;
 }
 
 void GameWidget::newGeneration()
 {
-    if(generations < 0)
-        generations++;
+    if(generacja < 0)
+        generacja++;
     int notChanged=0;
-    for(int k=1; k <= universeSize; k++) {
-        for(int j=1; j <= universeSize; j++) {
-            next[k][j] = isAlive(k, j);
-            if(next[k][j] == universe[k][j])
+    for(int k=1; k <= RozmiarPola; k++) {
+        for(int j=1; j <= RozmiarPola; j++) {
+            Tablica2[k][j] = Zyj(k, j);
+            if(Tablica2[k][j] == Tablica1[k][j])
                 notChanged++;
         }
     }
-    if(notChanged == universeSize*universeSize) {
+    if(notChanged == RozmiarPola*RozmiarPola) {
         QMessageBox::information(this,
                                  tr("Game lost sense"),
                                  tr("The End. Now game finished because all the next generations will be the same."),
                                  QMessageBox::Ok);
-        stopGame();
+        ZatrzymajGre();
         return;
     }
-    for(int k=1; k <= universeSize; k++) {
-        for(int j=1; j <= universeSize; j++) {
-            universe[k][j] = next[k][j];
+    for(int k=1; k <= RozmiarPola; k++) {
+        for(int j=1; j <= RozmiarPola; j++) {
+            Tablica1[k][j] = Tablica2[k][j];
         }
     }
     update();
-    generations--;
-    if(generations == 0) {
-        stopGame();
+    generacja--;
+    if(generacja == 0) {
+        ZatrzymajGre();
         QMessageBox::information(this,
                                  tr("Game finished."),
                                  tr("Iterations finished."),
@@ -155,24 +155,24 @@ void GameWidget::paintEvent(QPaintEvent *)
 
 void GameWidget::mousePressEvent(QMouseEvent *e)
 {
-    double cellWidth = (double)width()/universeSize;
-    double cellHeight = (double)height()/universeSize;
+    double cellWidth = (double)width()/RozmiarPola;
+    double cellHeight = (double)height()/RozmiarPola;
     int k = floor(e->y()/cellHeight)+1;
     int j = floor(e->x()/cellWidth)+1;
-    universe[k][j] = !universe[k][j];
+    Tablica1[k][j] = !Tablica1[k][j];
     update();
 }
 
 void GameWidget::paintGrid(QPainter &p)
 {
     QRect borders(0, 0, width()-1, height()-1); // borders of the universe
-    QColor gridColor = m_masterColor; // color of the grid
+    QColor gridColor = KolorBoxow; // color of the grid
     gridColor.setAlpha(10); // must be lighter than main color
     p.setPen(gridColor);
-    double cellWidth = (double)width()/universeSize; // width of the widget / number of cells at one row
+    double cellWidth = (double)width()/RozmiarPola; // width of the widget / number of cells at one row
     for(double k = cellWidth; k <= width(); k += cellWidth)
         p.drawLine(k, 0, k, height());
-    double cellHeight = (double)height()/universeSize; // height of the widget / number of cells at one row
+    double cellHeight = (double)height()/RozmiarPola; // height of the widget / number of cells at one row
     for(double k = cellHeight; k <= height(); k += cellHeight)
         p.drawLine(0, k, width(), k);
     p.drawRect(borders);
@@ -180,15 +180,15 @@ void GameWidget::paintGrid(QPainter &p)
 
 void GameWidget::paintUniverse(QPainter &p)
 {
-    double cellWidth = (double)width()/universeSize;
-    double cellHeight = (double)height()/universeSize;
-    for(int k=1; k <= universeSize; k++) {
-        for(int j=1; j <= universeSize; j++) {
-            if(universe[k][j] == true) { // if there is any sense to paint it
+    double cellWidth = (double)width()/RozmiarPola;
+    double cellHeight = (double)height()/RozmiarPola;
+    for(int k=1; k <= RozmiarPola; k++) {
+        for(int j=1; j <= RozmiarPola; j++) {
+            if(Tablica1[k][j] == true) { // if there is any sense to paint it
                 qreal left = (qreal)(cellWidth*j-cellWidth); // margin from left
                 qreal top  = (qreal)(cellHeight*k-cellHeight); // margin from top
                 QRectF r(left, top, (qreal)cellWidth, (qreal)cellHeight);
-                p.fillRect(r, QBrush(m_masterColor)); // fill cell with brush of main color
+                p.fillRect(r, QBrush(KolorBoxow)); // fill cell with brush of main color
             }
         }
     }
@@ -196,11 +196,11 @@ void GameWidget::paintUniverse(QPainter &p)
 
 QColor GameWidget::masterColor()
 {
-    return m_masterColor;
+    return KolorBoxow;
 }
 
 void GameWidget::setMasterColor(const QColor &color)
 {
-    m_masterColor = color;
+    KolorBoxow = color;
     update();
 }

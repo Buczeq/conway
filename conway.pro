@@ -14,10 +14,10 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    gamewidget.cpp
+    zycie.cpp
 
 HEADERS  += mainwindow.h \
-    gamewidget.h
+    zycie.h
 
 FORMS    += mainwindow.ui
 

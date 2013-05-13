@@ -18,9 +18,9 @@ MainWindow::MainWindow(QWidget *parent) :
     icon.fill(currentColor);
     ui->colorButton->setIcon( QIcon(icon) );
 
-    connect(ui->startButton, SIGNAL(clicked()), game,SLOT(startGame()));
-    connect(ui->stopButton, SIGNAL(clicked()), game,SLOT(stopGame()));
-    connect(ui->clearButton, SIGNAL(clicked()), game,SLOT(clear()));
+    connect(ui->startButton, SIGNAL(clicked()), game,SLOT(UruchomGre()));
+    connect(ui->stopButton, SIGNAL(clicked()), game,SLOT(ZatrzymajGre()));
+    connect(ui->clearButton, SIGNAL(clicked()), game,SLOT(WyczyscPola()));
     connect(ui->iterInterval, SIGNAL(valueChanged(int)), game, SLOT(setInterval(int)));
     connect(ui->cellsControl, SIGNAL(valueChanged(int)), game, SLOT(setCellNumber(int)));
     connect(ui->colorButton, SIGNAL(clicked()), this, SLOT(selectMasterColor()));
