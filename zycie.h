@@ -22,22 +22,17 @@ signals:
 public slots:
     void UruchomGre(const int &number = -1);
     void ZatrzymajGre();
-    void WyczyscPola();
-
-    int LiczbaKomorek(); // Liczba komórek w jednym rzędzie
-    void UstawLiczbeKomorek(const int &s); // set number of the cells in one row
-
-    int interval(); // interval between generations
-    void UstawInterval(int msec); // set interval between generations
+    void WyczyscPola();  
+    void UstawLiczbeKomorek(const int &s);
+    void UstawInterval(int msec);
+    void UstawSklad(const QString &data);
+    int interval();
+    int LiczbaKomorek();
 
     QColor JakiKolor();
-    void UstawianieKoloru(const QColor &color);
-
-    QString dump(); // dump of current universe
-    void setDump(const QString &data); // set current universe from it's dump
+    QString sklad();
 
 private slots:
-    void RysujSiatke(QPainter &p);
     void RysujPole(QPainter &p);
     void NowaGeneracja();
 
@@ -45,6 +40,7 @@ private:
 
     QTimer* timer;
     int generacja;
+    // poczatkowy rozmiar planszy
     bool Tablica1[1002][1002];
     bool Tablica2[1002][1002];
     int RozmiarPola;

@@ -13,57 +13,75 @@ Zycie::Zycie(QWidget *parent) :
     generacja(-1),
     RozmiarPola(100)
 {
+    // ustawienie tempa
     timer->setInterval(300);
+
+    // ustawienie koloru organizmów i tła
     KolorBoxow = "#ed85a2";
+    KolorTla= "#732c04";
+
     connect(timer, SIGNAL(timeout()), this, SLOT(NowaGeneracja()));
     memset(&Tablica1, false, sizeof(Tablica1));
     memset(&Tablica2, false, sizeof(Tablica2));
+
     rodzajRysowanegoOrganizmu=0;
-    KolorTla= "#732c04";
+
 }
 
+// Startowanie gry
 void Zycie::UruchomGre(const int &number)
 {
     generacja = number;
     timer->start();
 }
 
+// Kończenie Gry
 void Zycie::ZatrzymajGre()
 {
     timer->stop();
 }
 
+// Czyszczenie planszy do gier
 void Zycie::WyczyscPola()
 {
-    for(int k = 1; k <= RozmiarPola; k++) {
-        for(int j = 1; j <= RozmiarPola; j++) {
+    for(int k = 1; k <= RozmiarPola; k++)
+    {
+        for(int j = 1; j <= RozmiarPola; j++)
+        {
             Tablica1[k][j] = false;
         }
     }
     update();
-
 }
 
+// Zwracanie liczby komórek
 int Zycie::LiczbaKomorek()
 {
     return RozmiarPola;
 }
 
+// Ustawienie liczby komórek
 void Zycie::UstawLiczbeKomorek(const int &s)
 {
     RozmiarPola = s;
     update();
 }
 
-QString Zycie::dump()
+// metoda niezbędna do serializacji
+// zapisuje '*' w miejscach aktywnych i 'o' w miejscach nieaktywnych
+QString Zycie::sklad()
 {
     char temp;
     QString master = "";
-    for(int k = 1; k <= RozmiarPola; k++) {
-        for(int j = 1; j <= RozmiarPola; j++) {
-            if(Tablica1[k][j] == true) {
+    for(int k = 1; k <= RozmiarPola; k++)
+    {
+        for(int j = 1; j <= RozmiarPola; j++)
+        {
+            if(Tablica1[k][j] == true)
+            {
                 temp = '*';
-            } else {
+            } else
+            {
                 temp = 'o';
             }
             master.append(temp);
@@ -73,11 +91,14 @@ QString Zycie::dump()
     return master;
 }
 
-void Zycie::setDump(const QString &data)
+// Zczytywanie układu
+void Zycie::UstawSklad(const QString &data)
 {
     int current = 0;
-    for(int k = 1; k <= RozmiarPola; k++) {
-        for(int j = 1; j <= RozmiarPola; j++) {
+    for(int k = 1; k <= RozmiarPola; k++)
+    {
+        for(int j = 1; j <= RozmiarPola; j++)
+        {
             Tablica1[k][j] = data[current] == '*';
             current++;
         }
@@ -86,11 +107,13 @@ void Zycie::setDump(const QString &data)
     update();
 }
 
+// Zwracanie predkosci
 int Zycie::interval()
 {
     return timer->interval();
 }
 
+// Ustawienie predkosci
 void Zycie::UstawInterval(int msec)
 {
     timer->setInterval(msec);
@@ -98,64 +121,68 @@ void Zycie::UstawInterval(int msec)
 
 bool Zycie::Zyj(int k, int j)
 {
-    int power = 0;
-    power += Tablica1[k+1][j];
-    power += Tablica1[k-1][j];
-    power += Tablica1[k][j+1];
-    power += Tablica1[k][j-1];
-    power += Tablica1[k+1][j+1];
-    power += Tablica1[k-1][j-1];
-    power += Tablica1[k-1][j+1];
-    power += Tablica1[k+1][j-1];
-    if (((Tablica1[k][j] == true) && (power == 2)) || (power == 3))
+    int licz = 0;
+    licz += Tablica1[k+1][j];
+    licz += Tablica1[k-1][j];
+    licz += Tablica1[k][j+1];
+    licz += Tablica1[k][j-1];
+    licz += Tablica1[k+1][j+1];
+    licz += Tablica1[k-1][j-1];
+    licz += Tablica1[k-1][j+1];
+    licz += Tablica1[k+1][j-1];
+    if (((Tablica1[k][j] == true) && (licz == 2)) || (licz == 3))
            return true;
     return false;
 }
 
+// Tworzenie nowej generacji
 void Zycie::NowaGeneracja()
 {
     if(generacja < 0)
         generacja++;
     int notChanged=0;
-    for(int k=1; k <= RozmiarPola; k++) {
-        for(int j=1; j <= RozmiarPola; j++) {
+    for(int k=1; k <= RozmiarPola; k++)
+    {
+        for(int j=1; j <= RozmiarPola; j++)
+        {
             Tablica2[k][j] = Zyj(k, j);
             if(Tablica2[k][j] == Tablica1[k][j])
                 notChanged++;
         }
     }
-    if(notChanged == RozmiarPola*RozmiarPola) {
-        QMessageBox::information(this,
-                                 tr("Gra nie ma sensu"),
-                                 tr("Koniec. Gra zostala zakonczona poniawarz nasepne generację wygladac beda w ten sam sposob."),
-                                 QMessageBox::Ok);
+
+    if(notChanged == RozmiarPola*RozmiarPola)
+    {
+        QMessageBox::information(this,tr("Gra nie ma sensu"),tr("Koniec. Gra zostala zakonczona poniawaz nastepne generacje wygladac beda w ten sam sposob."),QMessageBox::Ok);
         ZatrzymajGre();
         return;
     }
-    for(int k=1; k <= RozmiarPola; k++) {
-        for(int j=1; j <= RozmiarPola; j++) {
+
+    for(int k=1; k <= RozmiarPola; k++)
+    {
+        for(int j=1; j <= RozmiarPola; j++)
+        {
             Tablica1[k][j] = Tablica2[k][j];
         }
     }
+
     update();
     generacja--;
-    if(generacja == 0) {
+    if(generacja == 0)
+    {
         ZatrzymajGre();
-        QMessageBox::information(this,
-                                 tr("Gra zakonczona."),
-                                 tr("Iteracja skonczona."),
-                                 QMessageBox::Ok,
-                                 QMessageBox::Cancel);
+        QMessageBox::information(this,tr("Gra zakonczona."),tr("Iteracja skonczona."),QMessageBox::Ok,QMessageBox::Cancel);
     }
 }
+
 
 void Zycie::paintEvent(QPaintEvent *)
 {
     QPainter p(this);
-    //RysujSiatke(p);
     RysujPole(p);
 }
 
+// Rysowanie wybranego pola - nowego organizmu, po kliknięciu
 void Zycie::mousePressEvent(QMouseEvent *e)
 {
     double cellWidth = (double)width()/RozmiarPola;
@@ -214,20 +241,7 @@ void Zycie::mousePressEvent(QMouseEvent *e)
     update();
 }
 
-void Zycie::RysujSiatke(QPainter &p)
-{
-    QRect borders(0, 0, width()-1, height()-1); // borders of the universe
-    QColor gridColor = KolorBoxow; // color of the grid
-    gridColor.setAlpha(10); // must be lighter than main color
-    p.setPen(gridColor);
-    double cellWidth = (double)width()/RozmiarPola; // width of the widget / number of cells at one row
-    for(double k = cellWidth; k <= width(); k += cellWidth)
-        p.drawLine(k, 0, k, height());
-    double cellHeight = (double)height()/RozmiarPola; // height of the widget / number of cells at one row
-    for(double k = cellHeight; k <= height(); k += cellHeight)
-        p.drawLine(0, k, width(), k);
-    p.drawRect(borders);
-}
+
 
 void Zycie::RysujPole(QPainter &p)
 {
@@ -257,8 +271,4 @@ QColor Zycie::JakiKolor()
     return KolorBoxow;
 }
 
-void Zycie::UstawianieKoloru(const QColor &color)
-{
-    KolorBoxow = color;
-    update();
-}
+

@@ -16,14 +16,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QPixmap icon(16, 16);
     icon.fill(DomyslnyKolor);
-    //ui->colorButton->setIcon( QIcon(icon) );
 
     connect(ui->startButton, SIGNAL(clicked()), game,SLOT(UruchomGre()));
     connect(ui->stopButton, SIGNAL(clicked()), game,SLOT(ZatrzymajGre()));
     connect(ui->clearButton, SIGNAL(clicked()), game,SLOT(WyczyscPola()));
     connect(ui->iterInterval, SIGNAL(valueChanged(int)), game, SLOT(UstawInterval(int)));
     connect(ui->cellsControl, SIGNAL(valueChanged(int)), game, SLOT(UstawLiczbeKomorek(int)));
-    //connect(ui->colorButton, SIGNAL(clicked()), this, SLOT(selectMasterColor()));
 
     connect(ui->saveButton, SIGNAL(clicked()), this, SLOT(ZapiszGre()));
     connect(ui->loadButton, SIGNAL(clicked()), this, SLOT(WczytajGre()));
@@ -36,17 +34,17 @@ MainWindow::MainWindow(QWidget *parent) :
 
 }
 
+
 MainWindow::~MainWindow()
 {
     delete ui;
 }
 
+
+// Zapisywanie stanu gry
 void MainWindow::ZapiszGre()
 {
-    QString filename = QFileDialog::getSaveFileName(this,
-                                                    tr("Save current game"),
-                                                    QDir::homePath(),
-                                                    tr("Conway's Game *.life Files (*.life)"));
+    QString filename = QFileDialog::getSaveFileName(this,tr("Zapisywanie"),QDir::homePath(),tr("Pliki Gra w zycie  (*.life)"));
     if(filename.length() < 1)
         return;
     QFile file(filename);
@@ -54,24 +52,22 @@ void MainWindow::ZapiszGre()
         return;
     QString s = QString::number(game->LiczbaKomorek())+"\n";
     file.write(s.toAscii());
-    file.write(game->dump().toAscii());
-    QColor color = game->JakiKolor();
-    QString buf = QString::number(color.red())+" "+
-                  QString::number(color.green())+" "+
-                  QString::number(color.blue())+"\n";
-    file.write(buf.toAscii());
-    buf.clear();
-    buf = QString::number(ui->iterInterval->value())+"\n";
-    file.write(buf.toAscii());
-    file.close();
+        file.write(game->sklad().toAscii());
+        QColor color = game->JakiKolor();
+        QString buf = QString::number(color.red())+" "+
+                      QString::number(color.green())+" "+
+                      QString::number(color.blue())+"\n";
+        file.write(buf.toAscii());
+        buf.clear();
+        buf = QString::number(ui->iterInterval->value())+"\n";
+        file.write(buf.toAscii());
+        file.close();
 }
 
+// Wczytywanie zapisanej Gry
 void MainWindow::WczytajGre()
 {
-    QString filename = QFileDialog::getOpenFileName(this,
-                                                    tr("Open saved game"),
-                                                    QDir::homePath(),
-                                                    tr("Conway's Game Of Life File (*.life)"));
+    QString filename = QFileDialog::getOpenFileName(this, tr("Otwieranie"),QDir::homePath(),tr("Pliki Gra w zycie (*.life)"));
     if(filename.length() < 1)
         return;
     QFile file(filename);
@@ -90,31 +86,19 @@ void MainWindow::WczytajGre()
         in >> t;
         dump.append(t+"\n");
     }
-    game->setDump(dump);
+    game->UstawSklad(dump);
 
-    int r,g,b; // RGB color
+    int r,g,b;
     in >> r >> g >> b;
     DomyslnyKolor = QColor(r,g,b);
-    game->UstawianieKoloru(DomyslnyKolor); // sets color of the dots
-    QPixmap icon(16, 16); // icon on the button
-    icon.fill(DomyslnyKolor); // fill with new color
-    //ui->colorButton->setIcon( QIcon(icon) ); // set icon for button
-    in >> r; // r will be interval number
+
+    QPixmap icon(16, 16);
+    icon.fill(DomyslnyKolor);
+    in >> r;
     ui->iterInterval->setValue(r);
     game->UstawInterval(r);
 }
 
-void MainWindow::selectMasterColor()
-{
-    QColor color = QColorDialog::getColor(DomyslnyKolor, this, tr("Select color of figures"));
-    if(!color.isValid())
-        return;
-    DomyslnyKolor = color;
-    game->UstawianieKoloru(color);
-    QPixmap icon(16, 16);
-    icon.fill(color);
-    //ui->colorButton->setIcon( QIcon(icon) );
-}
 
 void MainWindow::on_pushButton_2_clicked()
 {

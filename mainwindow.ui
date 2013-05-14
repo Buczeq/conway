@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Conway's Game of Life</string>
+   <string>Gra w życie</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
@@ -38,7 +38,7 @@
           <item>
            <widget class="QPushButton" name="clearButton">
             <property name="text">
-             <string>Clear</string>
+             <string>Wyczyść</string>
             </property>
            </widget>
           </item>
@@ -57,14 +57,14 @@
         <item>
          <widget class="QLabel" name="label">
           <property name="text">
-           <string>Universe Size</string>
+           <string>Rozmiar pola</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QSpinBox" name="cellsControl">
           <property name="suffix">
-           <string> cells</string>
+           <string> komórek</string>
           </property>
           <property name="minimum">
            <number>10</number>
@@ -80,14 +80,14 @@
         <item>
          <widget class="QLabel" name="label2">
           <property name="text">
-           <string>Generation interval (in msec)</string>
+           <string>Prędkość</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QSpinBox" name="iterInterval">
           <property name="suffix">
-           <string> ms</string>
+           <string/>
           </property>
           <property name="minimum">
            <number>50</number>
@@ -108,14 +108,14 @@
           <item>
            <widget class="QPushButton" name="loadButton">
             <property name="text">
-             <string>Load</string>
+             <string>Wczytaj</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QPushButton" name="saveButton">
             <property name="text">
-             <string>Save</string>
+             <string>Zapisz</string>
             </property>
            </widget>
           </item>

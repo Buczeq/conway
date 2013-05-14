@@ -18,7 +18,6 @@ public:
     ~MainWindow();
 
 public slots:
-    void selectMasterColor();
 
     void ZapiszGre();
     void WczytajGre();
