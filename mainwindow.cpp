@@ -21,10 +21,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->startButton, SIGNAL(clicked()), game,SLOT(UruchomGre()));
     connect(ui->stopButton, SIGNAL(clicked()), game,SLOT(ZatrzymajGre()));
     connect(ui->clearButton, SIGNAL(clicked()), game,SLOT(WyczyscPola()));
-    //connect(ui->iterInterval, SIGNAL(valueChanged(int)), game, SLOT(UstawInterval(int)));
-    connect(ui->cellsControl, SIGNAL(valueChanged(int)), game, SLOT(UstawLiczbeKomorek(int)));
 
     connect(ui->horizontalSlider,SIGNAL(valueChanged(int)), game, SLOT(UstawInterval(int)));
+     connect(ui->horizontalSlider_2,SIGNAL(valueChanged(int)), game, SLOT(UstawLiczbeKomorek(int)));
 
     connect(ui->saveButton, SIGNAL(clicked()), this, SLOT(ZapiszGre()));
     connect(ui->loadButton, SIGNAL(clicked()), this, SLOT(WczytajGre()));
@@ -97,7 +96,7 @@ void MainWindow::WczytajGre()
 
     int pojemnik;
     in >> pojemnik;
-    ui->cellsControl->setValue(pojemnik);
+    ui->horizontalSlider_2->setValue(pojemnik);
 
     game->UstawLiczbeKomorek(pojemnik);
 
