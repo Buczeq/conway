@@ -17,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QPixmap icon(16, 16);
     icon.fill(DomyslnyKolor);
 
+    // sygnały
     connect(ui->startButton, SIGNAL(clicked()), game,SLOT(UruchomGre()));
     connect(ui->stopButton, SIGNAL(clicked()), game,SLOT(ZatrzymajGre()));
     connect(ui->clearButton, SIGNAL(clicked()), game,SLOT(WyczyscPola()));
@@ -44,19 +45,25 @@ MainWindow::~MainWindow()
 // Zapisywanie stanu gry
 void MainWindow::ZapiszGre()
 {
-    QString filename = QFileDialog::getSaveFileName(this,tr("Zapisywanie"),QDir::homePath(),tr("Pliki Gra w zycie  (*.life)"));
-    if(filename.length() < 1)
+    QString Nazwapliku = QFileDialog::getSaveFileName(this,tr("Zapisywanie"),QDir::homePath(),tr("Pliki Gra w zycie  (*.life)"));
+    QFile file(Nazwapliku);
+
+    if(Nazwapliku.length() < 1)
+    {
         return;
-    QFile file(filename);
+    }
+
+
     if(!file.open(QIODevice::WriteOnly | QIODevice::Truncate))
+    {
         return;
+    }
+
     QString s = QString::number(game->LiczbaKomorek())+"\n";
     file.write(s.toAscii());
         file.write(game->sklad().toAscii());
         QColor color = game->JakiKolor();
-        QString buf = QString::number(color.red())+" "+
-                      QString::number(color.green())+" "+
-                      QString::number(color.blue())+"\n";
+        QString buf = QString::number(color.red())+" "+ QString::number(color.green())+" "+ QString::number(color.blue())+"\n";
         file.write(buf.toAscii());
         buf.clear();
         buf = QString::number(ui->iterInterval->value())+"\n";
@@ -67,26 +74,40 @@ void MainWindow::ZapiszGre()
 // Wczytywanie zapisanej Gry
 void MainWindow::WczytajGre()
 {
-    QString filename = QFileDialog::getOpenFileName(this, tr("Otwieranie"),QDir::homePath(),tr("Pliki Gra w zycie (*.life)"));
-    if(filename.length() < 1)
+    QString NazwaPliku = QFileDialog::getOpenFileName(this, tr("Otwieranie"),QDir::homePath(),tr("Pliki Gra w zycie (*.life)"));
+    QFile file(NazwaPliku);
+
+    // sptawdzenie czy plik nie jest pusty
+    if(NazwaPliku.length() < 1)
+    {
         return;
-    QFile file(filename);
+    }
+
+
+    // sprawdzenie czy mozna otworzyć plik
     if(!file.open(QIODevice::ReadOnly))
+    {
         return;
+    }
+
+
     QTextStream in(&file);
 
-    int sv;
-    in >> sv;
-    ui->cellsControl->setValue(sv);
+    int pojemnik;
+    in >> pojemnik;
+    ui->cellsControl->setValue(pojemnik);
 
-    game->UstawLiczbeKomorek(sv);
-    QString dump="";
-    for(int k=0; k != sv; k++) {
+    game->UstawLiczbeKomorek(pojemnik);
+
+    QString tekst="";
+
+    for(int i=0; i != pojemnik; i++)
+    {
         QString t;
         in >> t;
-        dump.append(t+"\n");
+        tekst.append(t+"\n");
     }
-    game->UstawSklad(dump);
+    game->UstawSklad(tekst);
 
     int r,g,b;
     in >> r >> g >> b;
@@ -132,20 +153,43 @@ void MainWindow::on_pushButton_6_clicked()
 
 }
 
+// sprawdzanie czy kosmos
 void MainWindow::on_radioButton_clicked()
 {
-    if(kosmos)
-    {
-        kosmos=false;
-        game->KolorBoxow = "#ed85a2";
-        game->KolorTla="#732c04";
-    }
 
-    if(!kosmos)
-    {
-        kosmos=true;
+    if(ui->radioButton->isChecked())
+     {
         game->KolorBoxow = "#ffffff";
         game->KolorTla="#000000";
+        update();
+     }
+    else
+    {
+        game->KolorBoxow = "#ed85a2";
+        game->KolorTla="#732c04";
+        update();
     }
+
+}
+
+// sprawdzanie czy ziemia
+void MainWindow::on_radioButton_2_clicked()
+{
+
+    if(ui->radioButton_2->isChecked())
+     {
+
+        game->KolorBoxow = "#ed85a2";
+        game->KolorTla="#732c04";
+        update();
+
+     }
+    else
+    {
+        game->KolorBoxow = "#ffffff";
+        game->KolorTla="#000000";
+        update();
+    }
+
 
 }

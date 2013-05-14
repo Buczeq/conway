@@ -16,11 +16,9 @@ public:
 protected:
     void paintEvent(QPaintEvent *);
     void mousePressEvent(QMouseEvent *e);
-    
-signals:
-    
+
 public slots:
-    void UruchomGre(const int &number = -1);
+    void UruchomGre(const int &numer = -1);
     void ZatrzymajGre();
     void WyczyscPola();  
     void UstawLiczbeKomorek(const int &s);
@@ -40,10 +38,13 @@ private:
 
     QTimer* timer;
     int generacja;
+    int RozmiarPola;
+
     // poczatkowy rozmiar planszy
     bool Tablica1[1002][1002];
     bool Tablica2[1002][1002];
-    int RozmiarPola;
+
+    // główna metoda
     bool Zyj(int k, int j);
 
 

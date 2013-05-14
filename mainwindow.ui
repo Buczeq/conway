@@ -55,78 +55,117 @@
          <layout class="QHBoxLayout" name="controlLayout"/>
         </item>
         <item>
-         <widget class="QLabel" name="label">
+         <widget class="Line" name="line_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_4">
           <property name="text">
-           <string>Rozmiar pola</string>
+           <string>Parametry</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="cellsControl">
-          <property name="suffix">
-           <string> komórek</string>
-          </property>
-          <property name="minimum">
-           <number>10</number>
-          </property>
-          <property name="maximum">
-           <number>1000</number>
-          </property>
-          <property name="value">
-           <number>100</number>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="label2">
-          <property name="text">
-           <string>Prędkość</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QSpinBox" name="iterInterval">
-          <property name="suffix">
-           <string/>
-          </property>
-          <property name="minimum">
-           <number>50</number>
-          </property>
-          <property name="maximum">
-           <number>100000</number>
-          </property>
-          <property name="singleStep">
-           <number>10</number>
-          </property>
-          <property name="value">
-           <number>100</number>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <layout class="QHBoxLayout" name="fileLayout">
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
           <item>
-           <widget class="QPushButton" name="loadButton">
+           <widget class="QLabel" name="label">
             <property name="text">
-             <string>Wczytaj</string>
+             <string>Rozmiar pola</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="saveButton">
-            <property name="text">
-             <string>Zapisz</string>
+           <widget class="QSpinBox" name="cellsControl">
+            <property name="suffix">
+             <string> komórek</string>
+            </property>
+            <property name="minimum">
+             <number>10</number>
+            </property>
+            <property name="maximum">
+             <number>1000</number>
+            </property>
+            <property name="value">
+             <number>100</number>
             </property>
            </widget>
           </item>
          </layout>
         </item>
         <item>
-         <widget class="QRadioButton" name="radioButton">
-          <property name="text">
-           <string>kosmos</string>
-          </property>
-         </widget>
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <item>
+           <widget class="QLabel" name="label2">
+            <property name="text">
+             <string>Prędkość</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="iterInterval">
+            <property name="suffix">
+             <string> ms</string>
+            </property>
+            <property name="prefix">
+             <string/>
+            </property>
+            <property name="minimum">
+             <number>50</number>
+            </property>
+            <property name="maximum">
+             <number>100000</number>
+            </property>
+            <property name="singleStep">
+             <number>10</number>
+            </property>
+            <property name="value">
+             <number>100</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>Podłoże</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_8">
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout">
+              <item>
+               <widget class="QRadioButton" name="radioButton_2">
+                <property name="text">
+                 <string>ziemia</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QRadioButton" name="radioButton">
+                <property name="text">
+                 <string>kosmos</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+         </layout>
         </item>
         <item>
          <widget class="Line" name="line">
@@ -138,7 +177,7 @@
         <item>
          <widget class="QLabel" name="label_2">
           <property name="text">
-           <string>Organizmy:</string>
+           <string>Przykładowe organizmy</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -190,6 +229,41 @@
            <widget class="QPushButton" name="pushButton_6">
             <property name="text">
              <string>Działo</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="Line" name="line_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_5">
+          <property name="text">
+           <string>Opcje</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="fileLayout">
+          <item>
+           <widget class="QPushButton" name="loadButton">
+            <property name="text">
+             <string>Wczytaj</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="saveButton">
+            <property name="text">
+             <string>Zapisz</string>
             </property>
            </widget>
           </item>

@@ -37,6 +37,8 @@ private slots:
 
     void on_radioButton_clicked();
 
+     void on_radioButton_2_clicked();
+
 private:
     Ui::MainWindow *ui;
     QColor DomyslnyKolor;
