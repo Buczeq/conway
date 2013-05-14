@@ -150,7 +150,7 @@ void Zycie::NowaGeneracja()
 void Zycie::paintEvent(QPaintEvent *)
 {
     QPainter p(this);
-    RysujSiatke(p);
+    //RysujSiatke(p);
     RysujPole(p);
 }
 
@@ -178,6 +178,27 @@ void Zycie::mousePressEvent(QMouseEvent *e)
         Tablica1[k][j+1] = !Tablica1[k][j+1];
         Tablica1[k+2][j+1] = !Tablica1[k+2][j+1];
         Tablica1[k+1][j+2] = !Tablica1[k+1][j+2];
+    }
+
+    if(rodzajRysowanegoOrganizmu==3)
+    {
+
+        for(int i=0;i<8;i++)
+        {
+            Tablica1[k][j+i] = !Tablica1[k][j+i];
+        }
+        for(int i=0;i<8;i++)
+        {
+            Tablica1[k+2][j+i] = !Tablica1[k+2][j+i];
+        }
+        Tablica1[k+1][j] = !Tablica1[k+1][j];
+        Tablica1[k+1][j+2] = !Tablica1[k+1][j+2];
+        Tablica1[k+1][j+3] = !Tablica1[k+1][j+3];
+        Tablica1[k+1][j+4] = !Tablica1[k+1][j+4];
+        Tablica1[k+1][j+5] = !Tablica1[k+1][j+5];
+        Tablica1[k+1][j+7] = !Tablica1[k+1][j+7];
+
+
     }
 
     update();

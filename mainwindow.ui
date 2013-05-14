@@ -124,6 +124,13 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
+           <widget class="QPushButton" name="pushButton">
+            <property name="text">
+             <string>Komórka</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QPushButton" name="pushButton_2">
             <property name="text">
              <string>Klocek</string>
@@ -137,10 +144,14 @@
             </property>
            </widget>
           </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
-           <widget class="QPushButton" name="pushButton">
+           <widget class="QPushButton" name="pushButton_4">
             <property name="text">
-             <string>PushButton</string>
+             <string>Krokodyl</string>
             </property>
            </widget>
           </item>

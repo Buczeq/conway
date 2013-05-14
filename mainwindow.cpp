@@ -122,3 +122,13 @@ void MainWindow::on_pushButton_3_clicked()
 {
     game->rodzajRysowanegoOrganizmu=2;
 }
+
+void MainWindow::on_pushButton_clicked()
+{
+    game->rodzajRysowanegoOrganizmu=0;
+}
+
+void MainWindow::on_pushButton_4_clicked()
+{
+    game->rodzajRysowanegoOrganizmu=3;
+}
