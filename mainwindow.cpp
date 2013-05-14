@@ -126,6 +126,12 @@ void MainWindow::on_pushButton_5_clicked()
 
 }
 
+void MainWindow::on_pushButton_6_clicked()
+{
+    game->rodzajRysowanegoOrganizmu=5;
+
+}
+
 void MainWindow::on_radioButton_clicked()
 {
     if(kosmos)

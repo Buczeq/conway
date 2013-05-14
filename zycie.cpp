@@ -255,8 +255,40 @@ Tablica1[k+1][j+22] = !Tablica1[k+1][j+22];
  Tablica1[k+5][j+24] = !Tablica1[k+5][j+24];
  Tablica1[k+6][j+24] = !Tablica1[k+6][j+24];
  
- Tablica1[k+2][j+34] = !Tablica1[k+2][j+34]
- Tablica1[k+3][j+34] = !Tablica1[k+3][j+34]
+ Tablica1[k+2][j+34] = !Tablica1[k+2][j+34];
+ Tablica1[k+3][j+34] = !Tablica1[k+3][j+34];
+
+ Tablica1[k+4][j] = !Tablica1[k+4][j];
+ Tablica1[k+4][j+1] = !Tablica1[k+4][j+1];
+
+ Tablica1[k+5][j] = !Tablica1[k+5][j];
+ Tablica1[k+5][j+1] = !Tablica1[k+5][j+1];
+
+
+ Tablica1[k+2][j+12] = !Tablica1[k+2][j+12];
+ Tablica1[k+2][j+13] = !Tablica1[k+2][j+13];
+
+ Tablica1[k+3][j+11] = !Tablica1[k+3][j+11];
+ Tablica1[k+3][j+15] = !Tablica1[k+3][j+15];
+
+ Tablica1[k+4][j+10] = !Tablica1[k+4][j+10];
+ Tablica1[k+4][j+16] = !Tablica1[k+4][j+16];
+
+ Tablica1[k+5][j+10] = !Tablica1[k+5][j+10];
+ Tablica1[k+5][j+14] = !Tablica1[k+5][j+14];
+ Tablica1[k+5][j+16] = !Tablica1[k+5][j+16];
+ Tablica1[k+5][j+17] = !Tablica1[k+5][j+17];
+
+ Tablica1[k+6][j+10] = !Tablica1[k+6][j+10];
+ Tablica1[k+6][j+16] = !Tablica1[k+6][j+16];
+
+ Tablica1[k+7][j+11] = !Tablica1[k+7][j+11];
+ Tablica1[k+7][j+15] = !Tablica1[k+7][j+15];
+
+ Tablica1[k+8][j+12] = !Tablica1[k+8][j+12];
+ Tablica1[k+8][j+13] = !Tablica1[k+8][j+13];
+
+
     }
 
     update();
