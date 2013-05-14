@@ -108,24 +108,18 @@
            </widget>
           </item>
           <item>
-           <widget class="QSpinBox" name="iterInterval">
-            <property name="suffix">
-             <string> ms</string>
-            </property>
-            <property name="prefix">
-             <string/>
-            </property>
+           <widget class="QSlider" name="horizontalSlider">
             <property name="minimum">
-             <number>50</number>
+             <number>10</number>
             </property>
             <property name="maximum">
-             <number>100000</number>
-            </property>
-            <property name="singleStep">
-             <number>10</number>
+             <number>300</number>
             </property>
             <property name="value">
              <number>100</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
             </property>
            </widget>
           </item>

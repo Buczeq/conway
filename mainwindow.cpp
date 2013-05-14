@@ -21,8 +21,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->startButton, SIGNAL(clicked()), game,SLOT(UruchomGre()));
     connect(ui->stopButton, SIGNAL(clicked()), game,SLOT(ZatrzymajGre()));
     connect(ui->clearButton, SIGNAL(clicked()), game,SLOT(WyczyscPola()));
-    connect(ui->iterInterval, SIGNAL(valueChanged(int)), game, SLOT(UstawInterval(int)));
+    //connect(ui->iterInterval, SIGNAL(valueChanged(int)), game, SLOT(UstawInterval(int)));
     connect(ui->cellsControl, SIGNAL(valueChanged(int)), game, SLOT(UstawLiczbeKomorek(int)));
+
+    connect(ui->horizontalSlider,SIGNAL(valueChanged(int)), game, SLOT(UstawInterval(int)));
 
     connect(ui->saveButton, SIGNAL(clicked()), this, SLOT(ZapiszGre()));
     connect(ui->loadButton, SIGNAL(clicked()), this, SLOT(WczytajGre()));
@@ -66,7 +68,7 @@ void MainWindow::ZapiszGre()
         QString buf = QString::number(color.red())+" "+ QString::number(color.green())+" "+ QString::number(color.blue())+"\n";
         file.write(buf.toAscii());
         buf.clear();
-        buf = QString::number(ui->iterInterval->value())+"\n";
+        buf = QString::number(ui->horizontalSlider->value())+"\n";
         file.write(buf.toAscii());
         file.close();
 }
@@ -116,7 +118,7 @@ void MainWindow::WczytajGre()
     QPixmap icon(16, 16);
     icon.fill(DomyslnyKolor);
     in >> r;
-    ui->iterInterval->setValue(r);
+    ui->horizontalSlider->setValue(r);
     game->UstawInterval(r);
 }
 
