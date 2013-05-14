@@ -258,6 +258,9 @@ Tablica1[k+1][j+22] = !Tablica1[k+1][j+22];
  Tablica1[k+2][j+34] = !Tablica1[k+2][j+34];
  Tablica1[k+3][j+34] = !Tablica1[k+3][j+34];
 
+ Tablica1[k+2][j+35] = !Tablica1[k+2][j+35];
+ Tablica1[k+3][j+35] = !Tablica1[k+3][j+35];
+
  Tablica1[k+4][j] = !Tablica1[k+4][j];
  Tablica1[k+4][j+1] = !Tablica1[k+4][j+1];
 
