@@ -149,6 +149,13 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
+           <widget class="QPushButton" name="pushButton_5">
+            <property name="text">
+             <string>Szybowiec</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QPushButton" name="pushButton_4">
             <property name="text">
              <string>Krokodyl</string>

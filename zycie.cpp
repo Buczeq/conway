@@ -200,6 +200,14 @@ void Zycie::mousePressEvent(QMouseEvent *e)
 
 
     }
+    if(rodzajRysowanegoOrganizmu==4)
+    {
+        Tablica1[k][j] = !Tablica1[k][j];
+        Tablica1[k+1][j] = !Tablica1[k+1][j];
+        Tablica1[k][j+1] = !Tablica1[k][j+1];
+        Tablica1[k+2][j+1] = !Tablica1[k+2][j+1];
+        Tablica1[k][j+2] = !Tablica1[k][j+2];
+    }
 
     update();
 }
