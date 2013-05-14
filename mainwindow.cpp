@@ -16,14 +16,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QPixmap icon(16, 16);
     icon.fill(DomyslnyKolor);
-    ui->colorButton->setIcon( QIcon(icon) );
+    //ui->colorButton->setIcon( QIcon(icon) );
 
     connect(ui->startButton, SIGNAL(clicked()), game,SLOT(UruchomGre()));
     connect(ui->stopButton, SIGNAL(clicked()), game,SLOT(ZatrzymajGre()));
     connect(ui->clearButton, SIGNAL(clicked()), game,SLOT(WyczyscPola()));
     connect(ui->iterInterval, SIGNAL(valueChanged(int)), game, SLOT(UstawInterval(int)));
     connect(ui->cellsControl, SIGNAL(valueChanged(int)), game, SLOT(UstawLiczbeKomorek(int)));
-    connect(ui->colorButton, SIGNAL(clicked()), this, SLOT(selectMasterColor()));
+    //connect(ui->colorButton, SIGNAL(clicked()), this, SLOT(selectMasterColor()));
 
     connect(ui->saveButton, SIGNAL(clicked()), this, SLOT(ZapiszGre()));
     connect(ui->loadButton, SIGNAL(clicked()), this, SLOT(WczytajGre()));
@@ -95,7 +95,7 @@ void MainWindow::WczytajGre()
     game->UstawianieKoloru(DomyslnyKolor); // sets color of the dots
     QPixmap icon(16, 16); // icon on the button
     icon.fill(DomyslnyKolor); // fill with new color
-    ui->colorButton->setIcon( QIcon(icon) ); // set icon for button
+    //ui->colorButton->setIcon( QIcon(icon) ); // set icon for button
     in >> r; // r will be interval number
     ui->iterInterval->setValue(r);
     game->UstawInterval(r);
@@ -110,7 +110,7 @@ void MainWindow::selectMasterColor()
     game->UstawianieKoloru(color);
     QPixmap icon(16, 16);
     icon.fill(color);
-    ui->colorButton->setIcon( QIcon(icon) );
+    //ui->colorButton->setIcon( QIcon(icon) );
 }
 
 void MainWindow::on_pushButton_2_clicked()

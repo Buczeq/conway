@@ -18,12 +18,9 @@
     <item>
      <layout class="QHBoxLayout" name="mainLayout">
       <item>
-       <layout class="QVBoxLayout" name="gameLayout"/>
-      </item>
-      <item>
-       <layout class="QVBoxLayout" name="setLayout">
+       <layout class="QVBoxLayout" name="gameLayout">
         <item>
-         <layout class="QHBoxLayout" name="controlLayout">
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
           <item>
            <widget class="QPushButton" name="startButton">
             <property name="text">
@@ -46,6 +43,16 @@
            </widget>
           </item>
          </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_3"/>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="setLayout">
+        <item>
+         <layout class="QHBoxLayout" name="controlLayout"/>
         </item>
         <item>
          <widget class="QLabel" name="label">
@@ -115,9 +122,19 @@
          </layout>
         </item>
         <item>
-         <widget class="QPushButton" name="colorButton">
+         <widget class="Line" name="line">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_2">
           <property name="text">
-           <string>Select color for cells</string>
+           <string>Organizmy:</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
           </property>
          </widget>
         </item>
