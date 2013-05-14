@@ -31,6 +31,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->mainLayout->setStretchFactor(ui->gameLayout, 8);
     ui->mainLayout->setStretchFactor(ui->setLayout, 2);
     ui->gameLayout->addWidget(game);
+    kosmos=false;
 
 
 }
@@ -138,5 +139,23 @@ void MainWindow::on_pushButton_4_clicked()
 void MainWindow::on_pushButton_5_clicked()
 {
     game->rodzajRysowanegoOrganizmu=4;
+
+}
+
+void MainWindow::on_radioButton_clicked()
+{
+    if(kosmos)
+    {
+        kosmos=false;
+        game->KolorBoxow = "#ed85a2";
+        game->KolorTla="#732c04";
+    }
+
+    if(!kosmos)
+    {
+        kosmos=true;
+        game->KolorBoxow = "#ffffff";
+        game->KolorTla="#000000";
+    }
 
 }

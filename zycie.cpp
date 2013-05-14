@@ -14,11 +14,12 @@ Zycie::Zycie(QWidget *parent) :
     RozmiarPola(100)
 {
     timer->setInterval(300);
-    KolorBoxow = "#000";
+    KolorBoxow = "#ed85a2";
     connect(timer, SIGNAL(timeout()), this, SLOT(NowaGeneracja()));
     memset(&Tablica1, false, sizeof(Tablica1));
     memset(&Tablica2, false, sizeof(Tablica2));
     rodzajRysowanegoOrganizmu=0;
+    KolorTla= "#732c04";
 }
 
 void Zycie::UruchomGre(const int &number)
@@ -230,6 +231,10 @@ void Zycie::RysujSiatke(QPainter &p)
 
 void Zycie::RysujPole(QPainter &p)
 {
+    // rysuje tło w danym kolorze
+    QRect borders(0, 0, width()-1, height()-1);
+    p.fillRect(borders, QBrush(KolorTla));
+
     double szerokoszcPixela = (double)width()/RozmiarPola;
     double wysokoscPixela = (double)height()/RozmiarPola;
     for(int k=1; k <= RozmiarPola; k++) {
@@ -243,9 +248,7 @@ void Zycie::RysujPole(QPainter &p)
         }
     }
 
-    // rysuje tło w danym kolorze
-    QRect borders(0, 0, width()-1, height()-1);
-    p.fillRect(borders, QBrush(QColor(128, 151, 105, 79)));
+
 
 }
 

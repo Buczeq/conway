@@ -122,6 +122,13 @@
          </layout>
         </item>
         <item>
+         <widget class="QRadioButton" name="radioButton">
+          <property name="text">
+           <string>kosmos</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="Line" name="line">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>

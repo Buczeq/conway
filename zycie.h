@@ -10,6 +10,8 @@ class Zycie : public QWidget
 public:
     explicit Zycie(QWidget *parent = 0);
     int rodzajRysowanegoOrganizmu;
+    QColor KolorBoxow;
+    QColor KolorTla;
 
 protected:
     void paintEvent(QPaintEvent *);
@@ -40,7 +42,7 @@ private slots:
     void NowaGeneracja();
 
 private:
-    QColor KolorBoxow;
+
     QTimer* timer;
     int generacja;
     bool Tablica1[1002][1002];

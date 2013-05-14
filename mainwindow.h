@@ -34,10 +34,13 @@ private slots:
 
     void on_pushButton_5_clicked();
 
+    void on_radioButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     QColor DomyslnyKolor;
     Zycie* game;
+    bool kosmos;
 };
 
 #endif // MAINWINDOW_H
