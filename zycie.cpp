@@ -40,6 +40,7 @@ void Zycie::WyczyscPola()
         }
     }
     update();
+
 }
 
 int Zycie::LiczbaKomorek()
