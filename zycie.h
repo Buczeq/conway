@@ -43,8 +43,8 @@ private:
     QColor KolorBoxow;
     QTimer* timer;
     int generacja;
-    bool Tablica1[102][102];
-    bool Tablica2[102][102];
+    bool Tablica1[1002][1002];
+    bool Tablica2[1002][1002];
     int RozmiarPola;
     bool Zyj(int k, int j);
 

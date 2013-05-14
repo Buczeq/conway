@@ -31,6 +31,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->mainLayout->setStretchFactor(ui->gameLayout, 8);
     ui->mainLayout->setStretchFactor(ui->setLayout, 2);
     ui->gameLayout->addWidget(game);
+
+
 }
 
 MainWindow::~MainWindow()
