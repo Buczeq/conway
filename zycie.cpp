@@ -125,8 +125,8 @@ void Zycie::NowaGeneracja()
     }
     if(notChanged == RozmiarPola*RozmiarPola) {
         QMessageBox::information(this,
-                                 tr("Game lost sense"),
-                                 tr("The End. Now game finished because all the next generations will be the same."),
+                                 tr("Gra nie ma sensu"),
+                                 tr("Koniec. Gra zostala zakonczona poniawarz nasepne generację wygladac beda w ten sam sposob."),
                                  QMessageBox::Ok);
         ZatrzymajGre();
         return;
@@ -141,8 +141,8 @@ void Zycie::NowaGeneracja()
     if(generacja == 0) {
         ZatrzymajGre();
         QMessageBox::information(this,
-                                 tr("Game finished."),
-                                 tr("Iterations finished."),
+                                 tr("Gra zakonczona."),
+                                 tr("Iteracja skonczona."),
                                  QMessageBox::Ok,
                                  QMessageBox::Cancel);
     }
@@ -234,11 +234,11 @@ void Zycie::RysujPole(QPainter &p)
     double wysokoscPixela = (double)height()/RozmiarPola;
     for(int k=1; k <= RozmiarPola; k++) {
         for(int j=1; j <= RozmiarPola; j++) {
-            if(Tablica1[k][j] == true) { // if there is any sense to paint it
-                qreal left = (qreal)(szerokoszcPixela*j-szerokoszcPixela); // margin from left
-                qreal top  = (qreal)(wysokoscPixela*k-wysokoscPixela); // margin from top
+            if(Tablica1[k][j] == true) { // sprawdza czy komorka jest pelna i jest sens ja rysowac
+                qreal left = (qreal)(szerokoszcPixela*j-szerokoszcPixela); // margines po lewej
+                qreal top  = (qreal)(wysokoscPixela*k-wysokoscPixela); // margines po prawej
                 QRectF r(left, top, (qreal)szerokoszcPixela, (qreal)wysokoscPixela);
-                p.fillRect(r, QBrush(KolorBoxow)); // fill cell with brush of main color
+                p.fillRect(r, QBrush(KolorBoxow)); // wypełnienie prostokąta kolorem
             }
         }
     }
