@@ -119,6 +119,7 @@ void Zycie::UstawInterval(int msec)
     timer->setInterval(msec);
 }
 
+// Metoda wykorzystywana do tworzenia nowej generacji
 bool Zycie::Zyj(int k, int j)
 {
     int licz = 0;
@@ -236,6 +237,26 @@ void Zycie::mousePressEvent(QMouseEvent *e)
         Tablica1[k][j+1] = !Tablica1[k][j+1];
         Tablica1[k+2][j+1] = !Tablica1[k+2][j+1];
         Tablica1[k][j+2] = !Tablica1[k][j+2];
+    }
+    if(rodzajRysowanegoOrganizmu==5)
+    {
+       Tablica1[k][j+24] = !Tablica1[k][j+24];
+Tablica1[k+1][j+22] = !Tablica1[k+1][j+22];
+ Tablica1[k+1][j+24] = !Tablica1[k+1][j+24];
+ 
+ Tablica1[k+2][j+20] = !Tablica1[k+2][j+20];
+ Tablica1[k+2][j+21] = !Tablica1[k+2][j+21];
+ Tablica1[k+3][j+20] = !Tablica1[k+3][j+20];
+ Tablica1[k+3][j+21] = !Tablica1[k+3][j+21];
+  Tablica1[k+4][j+20] = !Tablica1[k+4][j+20];
+ Tablica1[k+4][j+21] = !Tablica1[k+4][j+21];
+ 
+ Tablica1[k+5][j+22] = !Tablica1[k+5][j+22];
+ Tablica1[k+5][j+24] = !Tablica1[k+5][j+24];
+ Tablica1[k+6][j+24] = !Tablica1[k+6][j+24];
+ 
+ Tablica1[k+2][j+34] = !Tablica1[k+2][j+34]
+ Tablica1[k+3][j+34] = !Tablica1[k+3][j+34]
     }
 
     update();
