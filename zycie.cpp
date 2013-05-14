@@ -242,6 +242,11 @@ void Zycie::RysujPole(QPainter &p)
             }
         }
     }
+
+    // rysuje tło w danym kolorze
+    QRect borders(0, 0, width()-1, height()-1);
+    p.fillRect(borders, QBrush(QColor(128, 151, 105, 79)));
+
 }
 
 QColor Zycie::JakiKolor()
